@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast/home/home_screen.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weather Forecast',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColorDark: Colors.white,
+        primaryColor: Colors.white,
       ),
       home: const HomeScreen(),
     );

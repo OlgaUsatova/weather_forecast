@@ -1,19 +1,28 @@
-class AlbumModel {
-  final int userId;
-  final int id;
-  final String title;
+class WeatherModel {
+  final String cityName;
+  final double temperature;
+  final double feelsLike;
+  final String iconCode;
+  final String description;
+  final DateTime time;
 
-  const AlbumModel({
-    required this.userId,
-    required this.id,
-    required this.title,
+  WeatherModel({
+    required this.cityName,
+    required this.temperature,
+    required this.iconCode,
+    required this.description,
+    required this.time,
+    required this.feelsLike,
   });
 
-  factory AlbumModel.fromJson(Map<String, dynamic> json) {
-    return AlbumModel(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
+  factory WeatherModel.fromJson(Map<String, dynamic> json) {
+    return WeatherModel(
+      cityName: json['name'],
+      temperature: double.parse(json['main']['temp'].toString()),
+      feelsLike: double.parse(json['main']['temp'].toString()),
+      iconCode: json['weather'][0]['icon'],
+      description: json['weather'][0]['main'],
+      time: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
     );
   }
 }
