@@ -16,9 +16,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    const myTextTheme = TextStyle(
+      fontWeight: FontWeight.bold,
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Example'),
+        title: const Text('Погода'),
       ),
       body: Center(
         child: FutureBuilder<WeatherModel>(
@@ -29,22 +34,33 @@ class _HomeScreenState extends State<HomeScreen> {
               if (model == null) {
                 return const Text('Нет данных');
               }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              return Column(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const Expanded(
-                    child: Icon(Icons.ac_unit),
+                    child: Icon(Icons.add_chart),
                   ),
                   Expanded(
                     child: Column(
                       children: [
                         Expanded(
                           flex: 1,
-                          child: Text(model.cityName),
+                          child: Text(
+                            model.cityName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
                         Expanded(
                           flex: 2,
-                          child: Text("${model.temperature}"),
+                          child: Text(
+                            "${model.temperature}",
+                            style: theme.textTheme.bodyLarge,
+                          ),
                         ),
                       ],
                     ),
@@ -52,10 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               );
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              return Text(
+                '${snapshot.error}',
+                style: myTextTheme,
+              );
             }
-
-            // By default, show a loading spinner.
             return const CircularProgressIndicator();
           },
         ),
